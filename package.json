@@ -1,0 +1,17 @@
+{
+  "name": "bookshelf-issue-572",
+  "version": "1.0.0",
+  "description": "Experimenting with date parsing in DB clients",
+  "main": "test.js",
+  "scripts": {
+    "test": "node test.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/bendrucker/bookshelf-issue-572.git"
+  },
+  "bugs": {
+    "url": "https://github.com/bendrucker/bookshelf-issue-572/issues"
+  },
+  "homepage": "https://github.com/bendrucker/bookshelf-issue-572"
+}
