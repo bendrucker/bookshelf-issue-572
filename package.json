@@ -13,5 +13,12 @@
   "bugs": {
     "url": "https://github.com/bendrucker/bookshelf-issue-572/issues"
   },
-  "homepage": "https://github.com/bendrucker/bookshelf-issue-572"
+  "homepage": "https://github.com/bendrucker/bookshelf-issue-572",
+  "dependencies": {
+    "bookshelf": "~0.7.9",
+    "camel-case": "~1.1.1",
+    "knex": "~0.7.3",
+    "pg": "~4.2.0",
+    "snake-case": "~1.1.0"
+  }
 }
