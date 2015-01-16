@@ -15,10 +15,13 @@
   },
   "homepage": "https://github.com/bendrucker/bookshelf-issue-572",
   "dependencies": {
+    "bluebird": "~2.7.1",
     "bookshelf": "~0.7.9",
     "camel-case": "~1.1.1",
     "knex": "~0.7.3",
+    "mysql": "~2.5.4",
     "pg": "~4.2.0",
-    "snake-case": "~1.1.0"
+    "snake-case": "~1.1.0",
+    "sqlite3": "~3.0.4"
   }
 }
