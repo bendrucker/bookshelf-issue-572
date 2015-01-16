@@ -20,8 +20,8 @@ var config = {
     filename: ':memory:'
   },
   postgres: {
-    pre: format('psql -c "create database %s;"', dbName),
-    post: format('psql -c "drop database if exists %s;"', dbName),
+    pre: format('psql -c "create database %s;" -U postgres', dbName),
+    post: format('psql -c "drop database if exists %s;" -U postgres', dbName),
     database: dbName
   },
   mysql: {
