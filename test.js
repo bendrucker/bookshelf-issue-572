@@ -8,6 +8,7 @@ var Knex      = require('knex');
 var Bookshelf = require('bookshelf');
 var child     = Promise.promisifyAll(require('child_process'));
 var format    = require('util').format;
+var is        = require('is');
 
 Promise.longStackTraces();
 
@@ -17,18 +18,21 @@ var post = 'drop database if exists ' + dbName + ';';
 
 var config = {
   sqlite: {
-    filename: ':memory:'
+    filename: ':memory:',
+    type: 'number',
   },
   postgres: {
     pre: format('psql -c "create database %s;" -U postgres', dbName),
     post: format('psql -c "drop database if exists %s;" -U postgres', dbName),
-    database: dbName
+    database: dbName,
+    type: 'date'
   },
   mysql: {
     pre: format('mysql -e "create database %s;" -uroot', dbName),
     post: format('mysql -e "drop database %s;" -uroot', dbName),
     database: dbName,
-    user: 'root'
+    user: 'root',
+    type: 'date'
   }
 };
 
@@ -71,18 +75,18 @@ Promise.map(Object.keys(config), function (database) {
       .fetch();
   })
   .then(function (user) {
-    if (user.get('createdAt') instanceof Date && user.get('updatedAt') instanceof Date) {
-      console.log(database, 'timestamps are Date instances');
-    }
-    else {
-      console.log(database, 'timestamps are', typeof user.get('createdAt'));
-    }
+    var type = connection.type;
+    assert(is[type](user.get('createdAt')), format('%s timestamps are %s', database, type));
   })
   .bind(knex)
   .finally(knex.destroy)
   .finally(function () {
     if (connection.post) return child.execAsync(connection.post);
   });
+})
+.catch(function (err) {
+  console.error(err);
+  process.exit(1);
 });
 
 function transform (fn) {
